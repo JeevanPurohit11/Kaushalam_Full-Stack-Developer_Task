@@ -12,7 +12,7 @@ function Login() {
     const email = e.target.email.value;
     const password = e.target.password.value;
     try {
-      await axios.post('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/auth/login', {
+      await axios.post('/api/auth/login', {
         email,
         password,
       });
