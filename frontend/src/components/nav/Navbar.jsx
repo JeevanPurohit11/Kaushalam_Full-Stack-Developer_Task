@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const getUser = async () => {
     try {
-      const { data } = await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/users/me');
+      const { data } = await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/api/users/me');
       setUser(data);
     } catch (err) {
       console.log(err);
@@ -24,7 +24,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/auth/logout');
+      await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/api/auth/logout');
       setUser(null);
       toast.success('Logged out successfully');
       navigate('/auth');
