@@ -37,7 +37,7 @@ This full-stack to-do list application demonstrates both **front-end** and **bac
 
 ## Deployment
 
-The application is deployed on Vercel and accessible at: **[https://kaushalam-full-stack-developer-task.vercel.app](https://kaushalam-full-stack-developer-task.vercel.app)**
+The application is deployed on Vercel and accessible at: https://kaushalam-full-stack-developer-task-frontend.vercel.app/auth 
 
 ## Tech Stack
 
