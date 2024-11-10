@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://kaushalam-full-stack-developer-task.vercel.app/',
+        target: 'https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=cxOZ2ijiMHYX-90',
         changeOrigin: true,
         secure: false,
       },

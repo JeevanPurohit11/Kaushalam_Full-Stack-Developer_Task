@@ -13,7 +13,7 @@ function Register() {
       password: e.target.password.value,
     };
     try {
-      await axios.post('/api/auth/register', user);
+      await axios.post('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/auth/register', user);
       toast.success('Registered successfully');
     } catch (err) {
       console.log(err);
