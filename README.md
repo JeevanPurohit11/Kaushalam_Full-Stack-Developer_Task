@@ -53,37 +53,31 @@ The application is deployed on Vercel and accessible at: **[https://kaushalam-fu
 Set up Backend (server)
 
 Go to the server directory:
-bash
-Copy code
+
 cd server
 Install dependencies:
-bash
-Copy code
+
 npm install
 Set up environment variables:
 Create a .env file in the server directory with the following:
 makefile
-Copy code
+
 PORT=8000
 DB_CONNECTION_STRING=your_mongo_connection_string
 JWT_SECRET=your_jwt_secret
 Start the server:
-bash
-Copy code
+
 npm start
 Set up Frontend (client)
 
 Go to the client directory:
-bash
-Copy code
+
 cd ../client
 Install dependencies:
-bash
-Copy code
+
 npm install
 Start the front-end development server:
-bash
-Copy code
+
 npm start
 Run the App
 
