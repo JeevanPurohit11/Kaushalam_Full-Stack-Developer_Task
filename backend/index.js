@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 
 // middleware
 const corsOptions = {
-  origin: ["https://kaushalam-full-stack-developer-task-frontend.vercel.app"], 
+  origin: ["https://kaushalam-full-stack-developer-task-frontend.vercel.app/auth"], 
   methods: 'GET,POST,PUT,DELETE',
   credentials: true 
 };
