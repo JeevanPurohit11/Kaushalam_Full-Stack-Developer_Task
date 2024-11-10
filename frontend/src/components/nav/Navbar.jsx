@@ -27,7 +27,7 @@ export default function Navbar() {
       await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/auth/logout');
       setUser(null);
       toast.success('Logged out successfully');
-      navigate('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/auth');
+      navigate('/auth');
     } catch (err) {
       console.log(err);
     }
