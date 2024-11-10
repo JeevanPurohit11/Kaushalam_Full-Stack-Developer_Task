@@ -10,7 +10,13 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 // middleware
-app.use(cors());
+const corsOptions = {
+  origin: ["https://Kaushalam-Frontend.vercel.app"], 
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true 
+};
+
+app.use(cors(corsOptions));
 app.use(morgan('tiny'));
 app.use(express.json());
 app.use(cookieParser());
