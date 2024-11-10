@@ -1,13 +1,4 @@
-// controllers/users.js
-export const getUserInfo = async (req, res, next) => {
-  try {
-    const data = await User.findById(req.user.id)
-      .select('name email');
-    return res.status(200).json(data);
-  } catch (err) {
-    return next(err);
-  }
-};
+import User from '../models/User.js';
 
 export const updateUser = async (req, res, next) => {
   try {
@@ -22,6 +13,16 @@ export const updateUser = async (req, res, next) => {
       },
     ).select('name email');
     return res.status(200).json(updatedUser);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+export const getUserInfo = async (req, res, next) => {
+  try {
+    const data = await User.findById(req.user.id)
+      .select('name email');
+    return res.status(200).json(data);
   } catch (err) {
     return next(err);
   }

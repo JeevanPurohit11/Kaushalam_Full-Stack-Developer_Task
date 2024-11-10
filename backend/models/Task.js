@@ -17,7 +17,11 @@ const taskSchema = new Schema({
     ref: 'User',
     required: true,
   },
+  priority: {
+    type: String,
+    enum: ['low', 'medium', 'high'], 
+    default: 'medium', 
+  },
 }, { timestamps: true });
 
-// export default mongoose.model('Task', taskSchema);
-export default mongoose.model('Task',taskSchema);
+export default mongoose.model('Task', taskSchema);

@@ -2,11 +2,18 @@ import Task from '../models/Task.js';
 import createError from '../utils/createError.js';
 
 export const createTask = async (req, res, next) => {
+  const validPriorities = ['low', 'medium', 'high'];
+  if (req.body.priority && !validPriorities.includes(req.body.priority)) {
+    return next(createError({ status: 400, message: 'Invalid priority value' }));
+  }
+
   const newTask = new Task({
     title: req.body.title,
     user: req.user.id,
     completed: req.body.completed,
+    priority: req.body.priority || 'medium', 
   });
+
   try {
     const savedTask = await newTask.save();
     return res.status(200).json(savedTask);
@@ -16,6 +23,11 @@ export const createTask = async (req, res, next) => {
 };
 
 export const updateTask = async (req, res, next) => {
+  const validPriorities = ['low', 'medium', 'high'];
+  if (req.body.priority && !validPriorities.includes(req.body.priority)) {
+    return next(createError({ status: 400, message: 'Invalid priority value' }));
+  }
+
   try {
     const task = await Task.findById(req.params.taskId).exec();
     if (!task) return next(createError({ status: 404, message: 'Task not found' }));
@@ -24,12 +36,15 @@ export const updateTask = async (req, res, next) => {
     const updatedTask = await Task.findByIdAndUpdate(req.params.taskId, {
       title: req.body.title,
       completed: req.body.completed,
+      priority: req.body.priority || 'medium', 
     }, { new: true });
+
     return res.status(200).json(updatedTask);
   } catch (err) {
     return next(err);
   }
 };
+
 
 export const getAllTasks = async (req, res, next) => {
   try {
