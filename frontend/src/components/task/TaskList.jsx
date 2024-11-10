@@ -8,13 +8,13 @@ function TaskList() {
   const [taskList, setTaskList] = useState([]);
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [newTask, setNewTask] = useState('');
-  const [priority, setPriority] = useState('medium');  // Default priority is 'medium'
+  const [priority, setPriority] = useState('medium');  
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
 
   const getTasks = async () => {
     try {
-      const { data } = await axios.get('/api/tasks/mytasks');
+      const { data } = await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/tasks/mytasks');
       setTaskList(
         data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       );
@@ -47,7 +47,7 @@ function TaskList() {
       return;
     }
     try {
-      const { data } = await axios.post('/api/tasks/', {
+      const { data } = await axios.post('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/tasks/', {
         title: newTask,
         priority: priority,  // Send the priority when adding a new task
       });
@@ -63,7 +63,7 @@ function TaskList() {
 
   const editTask = async (id, updatedTitle, updatedPriority) => {
     try {
-      const { data } = await axios.put(`/api/tasks/${id}`, { title: updatedTitle, priority: updatedPriority });
+      const { data } = await axios.put(`https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/tasks/${id}`, { title: updatedTitle, priority: updatedPriority });
       setTaskList(taskList.map(task => task._id === id ? { ...task, title: data.title, priority: data.priority } : task));
       toast.success('Task updated successfully');
     } catch (err) {
@@ -73,7 +73,7 @@ function TaskList() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`/api/tasks/${id}`);
+      await axios.delete(`https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/tasks/${id}`);
       toast.success('Task deleted');
       setTaskList(taskList.filter((task) => task._id !== id));
     } catch (err) {
@@ -84,7 +84,7 @@ function TaskList() {
   const toggleTaskCompletion = async (id) => {
     try {
       const taskToToggle = taskList.find((task) => task._id === id);
-      const { data } = await axios.put(`/api/tasks/${id}`, { completed: !taskToToggle.completed });
+      const { data } = await axios.put(`https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/tasks/${id}`, { completed: !taskToToggle.completed });
       setTaskList(taskList.map(task => task._id === id ? { ...task, completed: data.completed } : task));
       toast.success('Task status updated');
     } catch (err) {

@@ -15,7 +15,7 @@ function EditProfileForm() {
     (
       async () => {
         try {
-          const { data } = await axios.get('/api/users/me');
+          const { data } = await axios.get('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/users/me');
           setUser(data);
         } catch (err) {
           console.log(err);
@@ -34,7 +34,7 @@ function EditProfileForm() {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('/api/users/me', user);
+      const res = await axios.put('https://kaushalam-full-stack-developer-task.vercel.app/?vercelToolbarCode=flhgh7ZL3AtGhv7/api/users/me', user);
       toast.success('Profile updated successfully');
       setUser(res.data);
     } catch (err) {
