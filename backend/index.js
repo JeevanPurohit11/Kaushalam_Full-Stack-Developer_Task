@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8000;
 // middleware
 const corsOptions = {
   origin: ["https://kaushalam-full-stack-developer-task-frontend.vercel.app"], 
-  methods: 'GET,POST,PUT,DELETE',
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
   credentials: true 
 };
 
