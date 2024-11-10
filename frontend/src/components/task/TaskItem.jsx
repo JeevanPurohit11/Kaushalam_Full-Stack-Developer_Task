@@ -9,6 +9,7 @@ function TaskItem({ task, deleteTask, editTask, toggleTaskCompletion }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(task.title);
+  const [newPriority, setNewPriority] = useState(task.priority || 'medium'); 
 
   const handleCheckboxClick = async () => {
     try {
@@ -30,7 +31,7 @@ function TaskItem({ task, deleteTask, editTask, toggleTaskCompletion }) {
   const handleSaveClick = async () => {
     try {
       setIsLoading(true);
-      await editTask(task._id, newTitle);
+      await editTask(task._id, newTitle, newPriority); 
       setIsEditing(false);
       toast.success('Task updated successfully');
     } catch (err) {
@@ -38,6 +39,10 @@ function TaskItem({ task, deleteTask, editTask, toggleTaskCompletion }) {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handlePriorityChange = (e) => {
+    setNewPriority(e.target.value);
   };
 
   return (
@@ -60,6 +65,18 @@ function TaskItem({ task, deleteTask, editTask, toggleTaskCompletion }) {
       </td>
       <td>{isCompleted ? 'Complete' : 'Incomplete'}</td>
       <td>{moment(task.createdAt).format('MMM Do YY')}</td>
+      <td>
+        {/* Priority Dropdown */}
+        {isEditing ? (
+          <select value={newPriority} onChange={handlePriorityChange}>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        ) : (
+          <p>{task.priority}</p> 
+        )}
+      </td>
       <td>
         <button type="button" className={classes.deleteBtn} onClick={() => deleteTask(task._id)}>
           Delete

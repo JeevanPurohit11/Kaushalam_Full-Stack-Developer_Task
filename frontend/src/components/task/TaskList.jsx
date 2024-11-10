@@ -8,6 +8,7 @@ function TaskList() {
   const [taskList, setTaskList] = useState([]);
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [newTask, setNewTask] = useState('');
+  const [priority, setPriority] = useState('medium');  // Default priority is 'medium'
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
 
@@ -26,16 +27,18 @@ function TaskList() {
     getTasks();
   }, []);
 
+  // Filtering tasks based on search term and selected priority
   const filteredTasks = taskList.filter((task) => {
     const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = 
+    const matchesFilter =
       (filter === 'all') ||
       (filter === 'completed' && task.completed) ||
       (filter === 'incomplete' && !task.completed) ||
-      (filter === 'high-priority' && task.priority === 'high');
+      (filter === 'high-priority' && task.priority === 'high') ||
+      (filter === 'medium-priority' && task.priority === 'medium') ||
+      (filter === 'low-priority' && task.priority === 'low');
     return matchesSearch && matchesFilter;
   });
-
 
   const addNewTask = async (e) => {
     e.preventDefault();
@@ -46,26 +49,27 @@ function TaskList() {
     try {
       const { data } = await axios.post('/api/tasks/', {
         title: newTask,
+        priority: priority,  // Send the priority when adding a new task
       });
       toast.success('New task added');
       setIsAddingNew(false);
       setNewTask('');
+      setPriority('medium');  // Reset to default priority
       setTaskList([{ ...data }, ...taskList]);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const editTask = async (id, updatedTitle) => {
+  const editTask = async (id, updatedTitle, updatedPriority) => {
     try {
-      const { data } = await axios.put(`/api/tasks/${id}`, { title: updatedTitle });
-      setTaskList(taskList.map(task => task._id === id ? { ...task, title: data.title } : task));
+      const { data } = await axios.put(`/api/tasks/${id}`, { title: updatedTitle, priority: updatedPriority });
+      setTaskList(taskList.map(task => task._id === id ? { ...task, title: data.title, priority: data.priority } : task));
       toast.success('Task updated successfully');
     } catch (err) {
       console.log(err);
     }
   };
-
 
   const deleteTask = async (id) => {
     try {
@@ -108,8 +112,11 @@ function TaskList() {
           <option value="completed">Completed</option>
           <option value="incomplete">Incomplete</option>
           <option value="high-priority">High Priority</option>
+          <option value="medium-priority">Medium Priority</option>
+          <option value="low-priority">Low Priority</option>
         </select>
       </div>
+
       {isAddingNew && (
         <form className={classes.addNewForm} onSubmit={addNewTask}>
           <input
@@ -118,9 +125,16 @@ function TaskList() {
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Task name"
           />
+          {/* Priority Selection */}
+          <select onChange={(e) => setPriority(e.target.value)} value={priority}>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
           <button type="submit">Add</button>
         </form>
       )}
+
       {filteredTasks.length > 0 ? (
         <table className={classes.taskList_table}>
           <tbody>
