@@ -1,4 +1,4 @@
-##Kaushalam_Full-Stack-Developer_Task - To-Do List App
+#Kaushalam_Full-Stack-Developer_Task - To-Do List App
 **Overview**
 This full-stack to-do list application demonstrates both front-end and back-end development skills using React, Node.js, and MongoDB. The app provides a user-friendly interface where users can add, view, edit, delete, and prioritize tasks, with authentication for managing personal to-do lists.
 
